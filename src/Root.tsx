@@ -10,9 +10,9 @@ import { crearCapitulosYT, getMp4UrlCommand } from './util';
 export const FPS = 30;
 export const TRANSITION_DURATION = 1;
 export const INTRO_DURATION = 1.6;
-export const OUTRO_DURATION = 10;
+export const OUTRO_DURATION = 15;
 export const TIMEBUFFER_TRANSITION = TRANSITION_DURATION * (FPS*2)
-export const NUM_CLIPS = 42;
+export const NUM_CLIPS = 4;
 
 export const RemotionRoot: React.FC = () => {
   const [handle] = useState(() => delayRender())
@@ -30,6 +30,7 @@ export const RemotionRoot: React.FC = () => {
         urlParametrized.append('orderBy', 'interval');
         urlParametrized.append('fromDate', new Date('2022-01-01').toISOString());
         urlParametrized.append('toDate', new Date('2022-12-31').toISOString());
+        urlParametrized.append('blocked', 'false');
 
         promisesVideos.push(fetch(`https://clips.fail/api/v1/getClips?${urlParametrized.toString()}`));
       }
@@ -38,7 +39,7 @@ export const RemotionRoot: React.FC = () => {
       const videosSortedDescViews = allJsons.sort((a, b) => b.viewCount - a.viewCount);
       const relevantVideos = videosSortedDescViews.splice(0, NUM_CLIPS).reverse()
 
-      console.log(crearCapitulosYT(relevantVideos))
+      console.log('DESCRIPCION: ', crearCapitulosYT(relevantVideos))
 
       return relevantVideos;
     }
