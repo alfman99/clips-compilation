@@ -64,7 +64,7 @@ export const ClipsCompilation = ({ videos }: IClipsCompilationProps) => {
       </Sequence>
       {renderAllVideos()}
       {
-        videos.length > 1 && (
+        videos.length > 0 && (
           <Sequence from={calculateFrom(videos.length - 1) + Math.round(videos[videos.length - 1].durationInSeconds * FPS) - Number(FPS)} durationInFrames={(OUTRO_DURATION * FPS) + TIMEBUFFER_TRANSITION}>
             <Transition type="in">
               <Outro/>
