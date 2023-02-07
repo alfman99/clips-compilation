@@ -12,7 +12,7 @@ export const TRANSITION_DURATION = 1;
 export const INTRO_DURATION = 1.6;
 export const OUTRO_DURATION = 15;
 export const TIMEBUFFER_TRANSITION = TRANSITION_DURATION * (FPS*2)
-export const NUM_CLIPS = 4;
+export const NUM_CLIPS = 42;
 
 export const RemotionRoot: React.FC = () => {
   const [handle] = useState(() => delayRender())
