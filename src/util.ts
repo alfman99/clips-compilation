@@ -10,7 +10,7 @@ const crearCapitulosYT = (videos: IClipsFailVideoInfo[]) => {
   let sumaSegundos = 0;
   for (let i = 0; i < videos.length; i++) {
     const vid = videos[i];
-    valString += `${new Date(sumaSegundos * 1000).toISOString().slice(11, 19)} - #${videos.length - i} - https://clips.fail/clip/${vid.id}\n`
+    valString += `${new Date(sumaSegundos * 1000).toISOString().slice(14, 19)} - #${videos.length - i} - https://clips.fail/clip/${vid.id}\n`
     sumaSegundos += vid.duration;
   }
   return valString;
