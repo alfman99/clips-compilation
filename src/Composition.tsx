@@ -1,5 +1,4 @@
-import {Audio, Sequence, staticFile} from 'remotion'
-import {Video} from 'remotion'
+import {Audio, OffthreadVideo, Sequence, staticFile} from 'remotion'
 import CallToAction from './CallToAction';
 import Intro from './Intro';
 import Outro from './Outro';
@@ -13,12 +12,12 @@ export interface IClipsCompilationProps {
 
 export const ClipsCompilation = ({ videos }: IClipsCompilationProps) => {
   const calculateFrom = (index: number) => {
-    let from = INTRO_DURATION * FPS;
+    let from = 0;
     for (let i = 0; i < index; i++) {
       from += Math.round(videos[i].durationInSeconds * FPS);
     }
     from += TRANSITION_DURATION * FPS;
-    return from;
+    return from - TIMEBUFFER_TRANSITION;
   }
 
   const renderNumPos = (index: number, total: number) => {
@@ -36,22 +35,23 @@ export const ClipsCompilation = ({ videos }: IClipsCompilationProps) => {
     return (
       videos.map((video, index) => {
         return (
-          <>
             <Sequence key={index} name={video.title} durationInFrames={Math.round(video.durationInSeconds * FPS) + TIMEBUFFER_TRANSITION} from={calculateFrom(index)}>
-              <Transition type="in">
-                <Audio volume={0.4} src={staticFile('swoosh.mp3')} />
-                {renderNumPos(index, videos.length)}
-                {/* <div className='absolute top-4 right-5 bg-black rounded-md px-3 pb-1 pt-2 bg-opacity-30'>
-                  <h1 className='text-5xl font-bold text-white drop-shadow-lg max-w-5xl text-center truncate h-14'>{video.title}</h1>
-                  <h2 className='text-white'>{video.viewCount}</h2>
-                </div> */}
-                {
-                  index === 3 && <CallToAction />
-                }
-                <Video src={video.url} />
-              </Transition>
+              {
+                index === 0 ? (
+                  <>
+                    <OffthreadVideo src={video.url} />
+                  </>
+                ) : (
+                  <Transition type="in">
+                    <Audio volume={0.4} src={staticFile('swoosh.mp3')} />
+                    {
+                      index === 4 && <CallToAction />
+                    }
+                    <OffthreadVideo src={video.url} />
+                  </Transition>
+                )
+              }
             </Sequence>
-          </>
         )
       })
     )
@@ -59,9 +59,9 @@ export const ClipsCompilation = ({ videos }: IClipsCompilationProps) => {
 
   return (
     <>
-      <Sequence durationInFrames={(INTRO_DURATION * FPS) + TIMEBUFFER_TRANSITION}>
+      {/* <Sequence durationInFrames={(INTRO_DURATION * FPS) + TIMEBUFFER_TRANSITION}>
         <Intro />
-      </Sequence>
+      </Sequence> */}
       {renderAllVideos()}
       {
         videos.length > 0 && (
