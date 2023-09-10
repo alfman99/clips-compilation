@@ -1,9 +1,7 @@
 /* eslint-disable @remotion/volume-callback */
 import {OffthreadVideo} from 'remotion'
 import { Sequence, Audio, interpolate, staticFile, Img } from 'remotion'
-import Animated from 'remotion-animated/dist/Animated'
-import Rotate from 'remotion-animated/dist/animations/Rotate'
-import Scale from 'remotion-animated/dist/animations/Scale'
+import { Rotate, Animated, Scale } from 'remotion-animated'
 import { FPS, INTRO_DURATION, TIMEBUFFER_TRANSITION } from './Root'
 
 const Intro = () => {

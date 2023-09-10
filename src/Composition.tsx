@@ -1,15 +1,19 @@
+import {z} from 'zod'
 import {Audio, OffthreadVideo, Sequence, staticFile} from 'remotion'
 // Import Intro from './Intro';
 import { FPS,  OUTRO_DURATION, TIMEBUFFER_TRANSITION, TRANSITION_DURATION } from './Root';
 import { Transition } from './Transition';
 import OutroSencilla from './OutroSencilla';
-import { IVideoInfo } from './types';
 
-export interface IClipsCompilationProps {
-  videos: IVideoInfo[];
-}
+export const IClipsCompilationPropsSchema = z.object({
+  videos: z.array(z.object({
+    title: z.string(),
+    url: z.string(),
+    durationInSeconds: z.number(),
+  }))
+})
 
-export const ClipsCompilation = ({ videos }: IClipsCompilationProps) => {
+export const ClipsCompilation: React.FC<z.infer<typeof IClipsCompilationPropsSchema>>  = ({ videos }) => {
   const calculateFrom = (index: number) => {
     let from = 0;
     for (let i = 0; i < index; i++) {

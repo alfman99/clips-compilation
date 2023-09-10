@@ -61,7 +61,9 @@ export const RemotionRoot = () => {
       promisesMetadata.push(getVideoMetadata(videoUrl));
     }
     const videosMetadata = await Promise.all(promisesMetadata);
+    console.log('[videosMetadata]', videosMetadata)
     const totalDuration = videosMetadata.reduce((acc, curr) => acc + curr.durationInSeconds, 0);
+    console.log('[totalDuration]', totalDuration)
     setDuration(Math.round(totalDuration));
     setVideos(videosMetadata.map((videoMetadata, index) => {
       console.log('[continueRender]')
