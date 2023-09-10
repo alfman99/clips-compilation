@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "start": "remotion preview",
-    "build": "remotion render ClipsCompilation out/video.mp4 --gl=angle --concurrency=1 --log=verbose",
+    "build": "remotion render ClipsCompilation out/video.mp4 --gl=angle --concurrency=6",
     "upgrade": "remotion upgrade",
     "test": "eslint src --ext ts,tsx,js,jsx && tsc"
   },

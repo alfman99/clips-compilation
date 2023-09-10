@@ -15,7 +15,7 @@ export const TIMEBUFFER_TRANSITION = TRANSITION_DURATION * (FPS*2)
 export const NUM_CLIPS = 42;
 
 export const RemotionRoot = () => {
-  const [handle] = useState(() => delayRender())
+  const [handle] = useState(() => delayRender('FETCH VIDEOS'))
   const [duration, setDuration] = useState(1);
   const [videos, setVideos] = useState<IVideoInfo[]>([]);
 
