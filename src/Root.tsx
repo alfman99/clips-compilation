@@ -14,7 +14,7 @@ export const OUTRO_DURATION = 15;
 export const TIMEBUFFER_TRANSITION = TRANSITION_DURATION * (FPS*2)
 export const NUM_CLIPS = 42;
 
-export const RemotionRoot: React.FC = () => {
+export const RemotionRoot = () => {
   const [handle] = useState(() => delayRender())
   const [duration, setDuration] = useState(1);
   const [videos, setVideos] = useState<IVideoInfo[]>([]);
@@ -53,32 +53,30 @@ export const RemotionRoot: React.FC = () => {
     }
   }
 
+  const doAll = async () => {
+    const videos = await getAllVideosURLs();
+    const promisesMetadata = [];
+    for (const video of videos) {
+      const videoUrl = getMp4UrlCommand(video.thumbnailUrl);
+      promisesMetadata.push(getVideoMetadata(videoUrl));
+    }
+    const videosMetadata = await Promise.all(promisesMetadata);
+    const totalDuration = videosMetadata.reduce((acc, curr) => acc + curr.durationInSeconds, 0);
+    setDuration(Math.round(totalDuration));
+    setVideos(videosMetadata.map((videoMetadata, index) => {
+      console.log('[continueRender]')
+      continueRender(handle);
+      return {
+        ...videoMetadata,
+        url: getMp4UrlCommand(videos[index].thumbnailUrl),
+        title: videos[index].title,
+        viewCount: videos[index].viewCount,
+      }
+    }));
+  }
+
   useEffect(() => {
-    getAllVideosURLs()
-      .then((videos) => {
-        const promisesMetadata = [];
-        for (const video of videos) {
-          const videoUrl = getMp4UrlCommand(video.thumbnailUrl);
-          promisesMetadata.push(getVideoMetadata(videoUrl));
-        }
-        Promise.all(promisesMetadata)
-          .then((videosMetadata) => {
-            const totalDuration = videosMetadata.reduce((acc, curr) => acc + curr.durationInSeconds, 0);
-            setDuration(Math.round(totalDuration));
-            setVideos(videosMetadata.map((videoMetadata, index) => {
-              continueRender(handle);
-              return {
-                ...videoMetadata,
-                url: getMp4UrlCommand(videos[index].thumbnailUrl),
-                title: videos[index].title,
-                viewCount: videos[index].viewCount,
-              }
-            }));
-          })
-      })
-      .catch((error) => {
-        console.error('[ERROR]', error);
-      })
+    doAll();
   }, [])
 
 	return (
