@@ -5,6 +5,5 @@
 		"source.organizeImports": false,
 		"source.fixAll": true
 	},
-	"typescript.enablePromptUseWorkspaceTsdk": true,
-	"css.lint.unknownAtRules": "ignore"
+	"typescript.enablePromptUseWorkspaceTsdk": true
 }

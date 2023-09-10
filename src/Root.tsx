@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FunctionComponent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Composition, continueRender, delayRender } from 'remotion';
 import { ClipsCompilation } from './Composition';
 import './style.css';
@@ -27,7 +27,7 @@ export const RemotionRoot: React.FC = () => {
         urlParametrized.append('offset', i.toString());
         urlParametrized.append('streamerId', '90075649');
         // UrlParametrized.append('time', 'month');
-        urlParametrized.append('orderBy', 'viewed');
+        urlParametrized.append('orderBy', 'interval');
         // UrlParametrized.append('gameId', '506438');
         urlParametrized.append('fromDate', new Date('2023-08-01').toISOString());
         urlParametrized.append('toDate', new Date('2023-08-31').toISOString());
@@ -84,7 +84,7 @@ export const RemotionRoot: React.FC = () => {
 	return (
     <Composition
       id="ClipsCompilation"
-      component={ClipsCompilation as unknown as FunctionComponent<{ videos: IVideoInfo[] }> }
+      component={ClipsCompilation}
       durationInFrames={Math.round((duration + INTRO_DURATION + OUTRO_DURATION) * FPS)}
       width={1920}
       height={1080}
