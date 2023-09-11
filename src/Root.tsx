@@ -36,7 +36,14 @@ export const RemotionRoot = () => {
         const urlFinal = `http://clips.fail/api/v1/getClips?${urlParametrized.toString()}`;
         console.log('URL: ', urlFinal);
 
-        promisesVideos.push(fetch(urlFinal));
+        // No-cors para que no de error de CORS
+        promisesVideos.push(fetch(urlFinal, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          mode: 'no-cors',
+        }));
       }
       const allVideos = await Promise.all(promisesVideos);
       const allJsons = (await Promise.all(allVideos.map((video) => video.json()))).flat() as IClipsFailVideoInfo[];
