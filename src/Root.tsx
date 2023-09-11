@@ -64,10 +64,9 @@ export const RemotionRoot = () => {
     console.log('[videosMetadata]', videosMetadata)
     const totalDuration = videosMetadata.reduce((acc, curr) => acc + curr.durationInSeconds, 0);
     console.log('[totalDuration]', totalDuration)
+    console.log('[handle]', handle)
     setDuration(Math.round(totalDuration));
     setVideos(videosMetadata.map((videoMetadata, index) => {
-      console.log('[continueRender]')
-      continueRender(handle);
       return {
         ...videoMetadata,
         url: getMp4UrlCommand(videos[index].thumbnailUrl),
@@ -75,6 +74,7 @@ export const RemotionRoot = () => {
         viewCount: videos[index].viewCount,
       }
     }));
+    continueRender(handle);
   }
 
   useEffect(() => {
