@@ -35,7 +35,7 @@ env:
 
 jobs:
   cache-dependencies:
-    runs-on: ubuntu-latest
+    runs-on: 29c4ab698c77
     steps:
       - uses: actions/checkout@v3
 
@@ -52,7 +52,7 @@ jobs:
         run: npm i
 
   build-matrix:
-    runs-on: ubuntu-latest
+    runs-on: 29c4ab698c77
     steps:
       - id: set-matrix
         run: |
@@ -63,7 +63,7 @@ jobs:
       workers_matrix: ${{ steps.set-matrix.outputs.workers_matrix }}
 
   retrieve-total-frames:
-    runs-on: ubuntu-latest
+    runs-on: 29c4ab698c77
     needs: [cache-dependencies]
     steps:
       - uses: actions/checkout@v3
@@ -91,7 +91,7 @@ jobs:
       total_frames: ${{ steps.get-total-frames.outputs.total_frames }}
 
   render-audio:
-    runs-on: ubuntu-latest
+    runs-on: 29c4ab698c77
     needs: [cache-dependencies]
     steps:
       - uses: actions/checkout@v3
@@ -120,7 +120,7 @@ jobs:
           path: ./workflow_output
 
   render-videos:
-    runs-on: ubuntu-latest
+    runs-on: 29c4ab698c77
     needs: [build-matrix, cache-dependencies, retrieve-total-frames]
     env:
       TOTAL_FRAMES: ${{needs.retrieve-total-frames.outputs.total_frames}}
@@ -169,7 +169,7 @@ jobs:
           path: ./workflow_output
 
   merge-videos:
-    runs-on: ubuntu-latest
+    runs-on: 29c4ab698c77
     needs: [render-videos]
     steps:
       - uses: actions/checkout@v3
