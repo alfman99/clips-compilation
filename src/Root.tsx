@@ -14,6 +14,15 @@ export const OUTRO_DURATION = 15;
 export const TIMEBUFFER_TRANSITION = TRANSITION_DURATION * (FPS*2)
 export const NUM_CLIPS = 42;
 
+const algoReorderVideosEngagement = (videos: IClipsFailVideoInfo[]) => { 
+  // TODO: Crear un algoritmo que ordene los videos para maximizar el engagement
+  const videosSortedDescViews = videos.sort((a, b) => b.viewCount - a.viewCount);
+
+  const relevantVideos = videosSortedDescViews.splice(0, NUM_CLIPS).reverse();
+
+  return relevantVideos;
+}
+
 export const RemotionRoot = () => {
   const [handle] = useState(() => delayRender('FETCH VIDEOS'))
   const [duration, setDuration] = useState(1);
@@ -37,22 +46,15 @@ export const RemotionRoot = () => {
         console.log('URL: ', urlFinal);
 
         // No-cors para que no de error de CORS
-        promisesVideos.push(fetch(urlFinal, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          mode: 'no-cors',
-        }));
+        promisesVideos.push(fetch(urlFinal));
       }
       const allVideos = await Promise.all(promisesVideos);
+      
       const allJsons = (await Promise.all(allVideos.map((video) => video.json()))).flat() as IClipsFailVideoInfo[];
-      const videosSortedDescViews = allJsons.sort((a, b) => b.viewCount - a.viewCount);
-      const relevantVideos = videosSortedDescViews.splice(0, NUM_CLIPS).reverse()
 
-      console.log('DESCRIPCION: ', crearCapitulosYT(relevantVideos))
+      const videosSortedDescEngagement = algoReorderVideosEngagement(allJsons);
 
-      return relevantVideos;
+      return videosSortedDescEngagement;
     }
     catch (error) {
       console.error('[ERROR]', error);

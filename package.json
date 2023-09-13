@@ -14,7 +14,7 @@
   "repository": {},
   "license": "UNLICENSED",
   "devDependencies": {
-    "@remotion/eslint-config": "4.0.36",
+    "@remotion/eslint-config": "4.0.37",
     "@types/react": "^18.0.26",
     "@types/web": "^0.0.86",
     "autoprefixer": "10.4.4",
@@ -30,11 +30,11 @@
     "zod": "^3.22.2"
   },
   "dependencies": {
-    "@remotion/cli": "4.0.36",
-    "@remotion/preload": "4.0.36",
+    "@remotion/cli": "4.0.37",
+    "@remotion/preload": "4.0.37",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "remotion": "4.0.36",
+    "remotion": "4.0.37",
     "remotion-animated": "^2.0.0"
   },
   "packageManager": "npm@8.17.0"
