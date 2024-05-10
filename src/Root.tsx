@@ -8,11 +8,11 @@ import { IClipsFailVideoInfo, IVideoInfo } from './types';
 import { crearCapitulosYT, getMp4UrlCommand } from './util';
 
 export const FPS = 30;
-export const TRANSITION_DURATION = 1;
+export const TRANSITION_DURATION = 0.19;
 export const INTRO_DURATION = 0;
-export const OUTRO_DURATION = 15;
+export const OUTRO_DURATION = 5;
 export const TIMEBUFFER_TRANSITION = TRANSITION_DURATION * (FPS*2)
-export const NUM_CLIPS = 42;
+export const NUM_CLIPS = 5;
 
 const algoReorderVideosEngagement = (videos: IClipsFailVideoInfo[]) => { 
   // TODO: Crear un algoritmo que ordene los videos para maximizar el engagement
@@ -34,12 +34,12 @@ export const RemotionRoot = () => {
       for (let i = 0; i < NUM_CLIPS; i += 15) {
         const urlParametrized = new URLSearchParams();
         urlParametrized.append('offset', i.toString());
-        urlParametrized.append('streamerId', '90075649');
+        // urlParametrized.append('streamerId', '90075649');
         // UrlParametrized.append('time', 'month');
-        urlParametrized.append('orderBy', 'interval');
+        urlParametrized.append('orderBy', 'hot');
         // UrlParametrized.append('gameId', '506438');
-        urlParametrized.append('fromDate', new Date('2023-08-01').toISOString());
-        urlParametrized.append('toDate', new Date('2023-08-31').toISOString());
+        // urlParametrized.append('fromDate', new Date('2023-08-01').toISOString());
+        // urlParametrized.append('toDate', new Date('2023-08-31').toISOString());
         urlParametrized.append('blocked', 'false');
 
         const urlFinal = `http://clips.fail/api/v1/getClips?${urlParametrized.toString()}`;
