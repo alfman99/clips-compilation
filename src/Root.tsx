@@ -40,7 +40,7 @@ export const RemotionRoot = () => {
         // urlParametrized.append('toDate', new Date('2023-08-31').toISOString());
         urlParametrized.append('blocked', 'false');
 
-        const urlFinal = `http://clips.fail/api/v1/getClips?${urlParametrized.toString()}`;
+        const urlFinal = `https://clips.fail/api/v1/getClips?${urlParametrized.toString()}`;
         console.log('URL: ', urlFinal);
 
         // No-cors para que no de error de CORS
@@ -81,6 +81,7 @@ export const RemotionRoot = () => {
         viewCount: videos[index].viewCount,
       }
     }));
+    console.log("DESCRIPTION:", crearCapitulosYT(videos));
     continueRender(handle);
   }
 
