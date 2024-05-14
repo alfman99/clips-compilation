@@ -66,7 +66,7 @@ export const ClipsCompilation: React.FC<z.infer<typeof IClipsCompilationPropsSch
         <Intro />
       </Sequence> */}
       {renderAllVideos()}
-      {
+      {/*
         videos.length > 0 && (
           <Sequence from={calculateFrom(videos.length - 1) + Math.round(videos[videos.length - 1].durationInSeconds * FPS) - Number(FPS*TRANSITION_DURATION)} durationInFrames={(OUTRO_DURATION * FPS) + TIMEBUFFER_TRANSITION}>
             <Transition type="in">
@@ -74,7 +74,7 @@ export const ClipsCompilation: React.FC<z.infer<typeof IClipsCompilationPropsSch
             </Transition>
           </Sequence>
         )
-      }
+      */}
     </>
   );
 };

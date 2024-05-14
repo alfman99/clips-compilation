@@ -9,12 +9,12 @@
     "start": "remotion preview",
     "build": "remotion render ClipsCompilation out/video.mp4 --concurrency=4",
     "upgrade": "remotion upgrade",
-    "test": "eslint src --ext ts,tsx,js,jsx && tsc"
+    "lambda": "remotion lambda render https://remotionlambda-xp2rj2bdz4.s3.us-east-1.amazonaws.com/sites/clips-compilation/index.html ClipsCompilation"
   },
   "repository": {},
   "license": "UNLICENSED",
   "devDependencies": {
-    "@remotion/eslint-config": "4.0.155",
+    "@remotion/eslint-config": "4.0.157",
     "@types/react": "^18.3.1",
     "@types/web": "^0.0.144",
     "autoprefixer": "10.4.19",
@@ -30,11 +30,12 @@
     "zod": "^3.23.8"
   },
   "dependencies": {
-    "@remotion/cli": "4.0.155",
-    "@remotion/preload": "4.0.155",
+    "@remotion/cli": "4.0.157",
+    "@remotion/lambda": "4.0.157",
+    "@remotion/preload": "4.0.157",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "remotion": "4.0.155",
+    "remotion": "4.0.157",
     "remotion-animated": "^2.0.0"
   },
   "packageManager": "npm@8.17.0"

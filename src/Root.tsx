@@ -16,11 +16,9 @@ export const NUM_CLIPS = 10;
 
 const algoReorderVideosEngagement = (videos: IClipsFailVideoInfo[]) => { 
   // TODO: Crear un algoritmo que ordene los videos para maximizar el engagement
-  const videosSortedDescViews = videos.sort((a, b) => b.viewCount - a.viewCount);
+  videos = videos.sort((a, b) => b.viewCount - a.viewCount);
 
-  const relevantVideos = videosSortedDescViews.splice(0, NUM_CLIPS).reverse();
-
-  return relevantVideos;
+  return videos.splice(0, NUM_CLIPS).reverse();
 }
 
 export const RemotionRoot = () => {
@@ -31,10 +29,10 @@ export const RemotionRoot = () => {
   const getAllVideosURLs = async () => {
     try {
       const promisesVideos = [];
-      for (let i = 0; i < NUM_CLIPS; i += 15) {
+      for (let i = 0; i < NUM_CLIPS; i += 45) {
         const urlParametrized = new URLSearchParams();
         urlParametrized.append('offset', i.toString());
-        // urlParametrized.append('streamerId', '90075649');
+        // urlParametrized.append('streamerId', '649885352');
         urlParametrized.append('time', 'week');
         urlParametrized.append('orderBy', 'viewed');
         // UrlParametrized.append('gameId', '506438');
