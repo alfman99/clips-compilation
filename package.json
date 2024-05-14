@@ -9,7 +9,7 @@
     "start": "remotion preview",
     "build": "remotion render ClipsCompilation out/video.mp4 --concurrency=4",
     "upgrade": "remotion upgrade",
-    "lambda": "remotion lambda render https://remotionlambda-xp2rj2bdz4.s3.us-east-1.amazonaws.com/sites/clips-compilation/index.html ClipsCompilation"
+    "lambda": "remotion lambda render https://remotionlambda-xp2rj2bdz4.s3.us-east-1.amazonaws.com/sites/clips-compilation/index.html ClipsCompilation --delete-after=\"1-day\" --webhook=https://eo520vll61sxsbn.m.pipedream.net --webhook-custom-data=\"{\\\"token\\\":\\\"RYxjiw6yoRQ9YP\\\"}\""
   },
   "repository": {},
   "license": "UNLICENSED",
