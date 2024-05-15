@@ -5,7 +5,7 @@ import { ClipsCompilation } from './Composition';
 import './style.css';
 import { getVideoMetadata } from '@remotion/media-utils';
 import { IClipsFailVideoInfo, IVideoInfo } from './types';
-import { crearCapitulosYT, getMp4UrlCommand } from './util';
+import { crearCapitulosYT, getMp4UrlCommand, sendChaptersToPastebin } from './util';
 
 export const FPS = 30;
 export const TRANSITION_DURATION = 0.19;
@@ -90,7 +90,12 @@ export const RemotionRoot = () => {
         viewCount: videos[index].viewCount,
       }
     }));
-    console.log("DESCRIPTION:", crearCapitulosYT(videos));
+
+    const capitulos = crearCapitulosYT(videos);
+
+    if (process.env.NODE_ENV !== 'development') {
+      sendChaptersToPastebin(capitulos);
+    }
     continueRender(handle);
   }
 
