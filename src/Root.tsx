@@ -12,13 +12,22 @@ export const TRANSITION_DURATION = 0.19;
 export const INTRO_DURATION = 0;
 export const OUTRO_DURATION = 5;
 export const TIMEBUFFER_TRANSITION = TRANSITION_DURATION * (FPS*2)
-export const NUM_CLIPS = 10;
+export const NUM_CLIPS = 50;
+export const NUM_MIN_DURATION = 60*10;
 
 const algoReorderVideosEngagement = (videos: IClipsFailVideoInfo[]) => { 
   // TODO: Crear un algoritmo que ordene los videos para maximizar el engagement
-  videos = videos.sort((a, b) => b.viewCount - a.viewCount);
+  videos = videos.sort((a, b) => a.viewCount - b.viewCount);
 
-  return videos.splice(0, NUM_CLIPS).reverse();
+  const videosReturn = [];
+  let duration = 0;
+  while (duration < NUM_MIN_DURATION) {
+    const video = videos.pop();
+    if (!video) break;
+    videosReturn.push(video);
+    duration += video.duration;
+  }
+  return videosReturn;
 }
 
 export const RemotionRoot = () => {
@@ -33,7 +42,7 @@ export const RemotionRoot = () => {
         const urlParametrized = new URLSearchParams();
         urlParametrized.append('offset', i.toString());
         // urlParametrized.append('streamerId', '649885352');
-        urlParametrized.append('time', 'week');
+        urlParametrized.append('time', 'month');
         urlParametrized.append('orderBy', 'viewed');
         // UrlParametrized.append('gameId', '506438');
         // urlParametrized.append('fromDate', new Date('2023-08-01').toISOString());
